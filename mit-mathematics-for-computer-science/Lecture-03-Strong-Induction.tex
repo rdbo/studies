@@ -1,0 +1,243 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{forest}
+\usepackage[makeroom]{cancel}
+\begin{document}
+	\section{Concepts}
+	\subsection{Good proofs}
+	Characteristics of good proofs are:
+	\begin{itemize}
+		\item 1) Correct
+		\item 2) Complete
+		\item 3) Clear
+		\item 4) Brief
+		\item 5) "Elegant" (clever, crisp)
+		\item 6) Well organized (using lemmas as if you are using subroutines in code)
+		\item 7) In order (from the most basic to the most complex, do it bottom-up)
+	\end{itemize}
+	\subsection{Invariant}
+	An invariant is a characteristic of remaining unchanged after operations or transformations.
+	\subsection{Corollary}
+	A deduction or inference from other proofs. A simple consequence of something else.
+	\subsection{Lemma}
+	A lemma is a tool for a bigger thing, often a theorem or another lemma.
+	
+	\section{Puzzle problem}
+	Given the puzzle on the left, can you turn it into the puzzle on the right? \\
+	The only legal move is sliding the square to an adjacent square, and the empty one is a gap you can push around.\\\\
+	from
+	\begin{tabular}{ |c|c|c| } 
+		\hline
+		A & B & C \\
+		\hline
+		D & E & F \\ 
+		\hline
+		H & G & \\ 
+		\hline
+	\end{tabular}
+	to
+	\begin{tabular}{ |c|c|c| } 
+		\hline
+		A & B & C \\
+		\hline
+		D & E & F \\ 
+		\hline
+		G & H & \\ 
+		\hline
+	\end{tabular}
+	
+	\pagebreak
+	
+	\subsection{Induction}
+	\textbf{Theorem}: there is no sequence of legal moves to invert G and H and also keep the other letters in their original position.\\\\
+	There are two types of moves: row moves and column moves.\\
+	\begin{center}
+		Row move:\\
+		$ $\\
+		\begin{tabular}{ |c|c|c| } 
+			\hline
+			A & B & C \\
+			\hline
+			D & G & \\ 
+			\hline
+			E & F & H\\ 
+			\hline
+		\end{tabular} $=>$
+		\begin{tabular}{ |c|c|c| } 
+			\hline
+			A & B & C \\
+			\hline
+			D &  & G \\ 
+			\hline
+			E & F & H\\ 
+			\hline
+		\end{tabular}
+	\end{center}
+	\textbf{Lemma 1}: Row moves don't change the order of the items. In the above example, even after moving, the order is still [A, B, C, D, G, E, F, H].\\
+	\textbf{Proof}: In a row move, we move an item from cell $i$ to $i + 1$ or $i - 1$. Whichever direction we move to, there must be an empty space, so it can never change the order of our sequence. Nothing else moves. \qedsymbol
+	
+	\begin{center}
+		Column move:\\
+		$ $\\
+		\begin{tabular}{ |c|c|c| } 
+			\hline
+			A & B & C \\
+			\hline
+			D & F & \\ 
+			\hline
+			H & E & G\\ 
+			\hline
+		\end{tabular} $=>$
+		\begin{tabular}{ |c|c|c| } 
+			\hline
+			A & B & C \\
+			\hline
+			D & F  & G \\ 
+			\hline
+			H & E & \\ 
+			\hline
+		\end{tabular}
+		\\
+		$ $\\
+		$ $\\
+		\begin{tabular}{ |c|c|c| } 
+			\hline
+			A & B & C \\
+			\hline
+			D &  & G \\ 
+			\hline
+			H & E & F\\ 
+			\hline
+		\end{tabular} $=>$
+		\begin{tabular}{ |c|c|c| } 
+			\hline
+			A &  & C \\
+			\hline
+			D & B  & G \\ 
+			\hline
+			H & E & F\\ 
+			\hline
+		\end{tabular}
+	\end{center}
+	\textbf{Lemma 2}: A column move changes the relative order of precisely 2 pairs of items.\\
+	\textbf{Proof}: In a column move, we move an item in cell $i$ to a blank spot in cell $i + 3$ or $i - 3$. When an item moves 3 positions, it changes relative order with two other items ($i - 1, i - 2$ or $i + 1, i + 2$). \qedsymbol
+	\\
+	\\
+	An \textbf{inversion} is when a letter $L_1$ precedes $L_2$ in the alphabet, but is after $L_2$ in the puzzle. In the initial case, we have one inversion of G and H.
+	
+	\pagebreak
+	
+	\textbf{Lemma 3}: During a move, the number of inversions can only increase by two, decrease by two, or stay the same.
+	
+	\textbf{Proof}: In a row move, there are no changes (by lemma 1). In a column move, there are three cases:
+	\begin{itemize}
+		\item Both pair were in order prior to the move: number of inversions goes up by two
+		\item Both pairs were inverted prior to the move: number of inversions goes down by two
+		\item One pair was inverted, the other wasn't: number of inversions stays the same
+	\end{itemize}
+	\textbf{Corollary 1}: The parity (even/odd) of the number of inversions does not change.\\
+	\textbf{NOTE:} Pairs are relative to every other letter! Example: the pairs are [A, B], [A, C], ..., [B, C], [B, D], ... [C, D], [C, E], ..., [G, H].
+	\\
+	
+	\textbf{Lemma 4}: In every state reachable from the following puzzle, the parity of number of inversions is odd:
+	\\
+	
+	\begin{tabular}{ |c|c|c| } 
+		\hline
+		A & B & C \\
+		\hline
+		D & E & F \\ 
+		\hline
+		H & G & \\ 
+		\hline
+	\end{tabular}
+	\\
+	\\
+	
+	\textbf{Proof by induction}: $P(n)$ = after any sequence of $n$ moves from the start state, the parity of number of inversions is odd.
+	\\
+	
+	\textbf{Base case}:  for $n = 0$, the parity of \# inversions is the same because we haven't made a move.
+	\\
+	
+	\textbf{Inductive step}: for $n \geq 0$, show $P(n) => P(n + 1)$. By assuming $P(n)$ is true, we know the parity up until the move $n$ is odd. By \textbf{Corollary 1}, we know that after a single move, the parity of \# inversions doesn't change. Therefore $P(n) => P(n + 1)$.
+	\\
+	\subsection{Proof of theorem}
+	The parity of the number of inversions in the desired state is even ($0$) --- it's an \textbf{invariant}. By \textbf{Lemma 4}, the desired state cannot be reached from the start state because its parity is odd.
+	
+	\pagebreak
+	
+	\section{Strong induction}
+	Let $P(n)$ be any predicate. If $P(0)$ is true, and $\forall\ n \left( P\left(0\right), P\left(1\right), ..., P\left(n\right) \right) => P\left(n + 1\right) $, then $\forall\ n\ \ P(n)$ is true.
+	
+	\section{Unstacking game}
+	You have a stack of 8 blocks. You can divide this stack into smaller stacks, and you get $x * y$ points, where $x$ is the amount of blocks in the left stack, and $y$ is the amount of blocks in the right stack. You keep going until you have 8 stacks of height 1, and your score is the sum of all your points.
+	
+	\begin{forest}
+		for tree={circle,draw, l sep=20pt}
+		[8
+			[5]
+			[3, edge label={node[midway, right] {Points: $5 * 3 = 15$}}
+				[2]
+				[1, edge label={node[midway, right] {Points: $2 * 1 = 2$}}]
+			]
+		]
+	\end{forest}
+	
+	Current score: $15 + 2 = 17$
+	
+	\subsection{Theorem}
+	All strategies for the n-block game produce the same score $S(n)$.
+	
+	\pagebreak
+	
+	\subsection{Proof by strong induction}
+	\subsubsection{Predicate}
+	$P(n) = S(n)$
+	\subsubsection{Base case}
+	for $n = 1$, $S(1) = 0$ because there are no moves.
+	\subsubsection{Inductive step}
+	We assume $P(1), P(2), ..., P(n)$ to be true in order to prove $P(n + 1)$.
+	
+	\begin{forest}
+		for tree={circle,draw, l sep=20pt}
+		[n + 1
+			[k
+				[P(k)]
+			]
+			[n + 1 - k, edge label={node[midway, right] {Points: $k(n + 1 - k) + P(k) + P(n + 1 - k)$}}
+				[P(n + 1 - k)]
+			]
+		]
+	\end{forest}
+	\\
+	\\
+	We can't proceed with just this information, so let's make a stronger assumption. Let's give $S(n)$ a formula: $S(n) = \frac{n(n - 1)}{2}$.\\
+	For $n = 8$, $S(8) = 28$, which is correct.\\
+	For $n = 2$, $S(2) = 1$, which is correct.\\
+	For $n = 3$, $S(3) = 3$, which is correct.\\
+	For $n = 1$, $S(1) = 0$, which is correct.
+	
+	\pagebreak
+	
+	Now, let's go back to our initial problem and replace $P(n)$ with $\frac{n(n - 1)}{2}$:
+	\begin{equation}
+		k(n + 1 - k) + P(k) + P(n + 1 - k)
+	\end{equation}
+	\begin{equation}
+		k(n + 1 - k) + \frac{k(k - 1)}{2} + \frac{(n + 1 - k)(n - k)}{2}
+	\end{equation}
+	\begin{equation}
+		\frac{\cancel{2kn} + \cancel{2k} - \cancel{2k^2} + \cancel{k^2} - \cancel{k} + (n + 1)n - \cancel{kn} - \cancel{k} + \cancel{k^2} - \cancel{kn}}{2}
+	\end{equation}
+	\begin{equation}
+		\frac{(n + 1)n}{2}
+	\end{equation}
+	\begin{equation}
+		\frac{(n + 1)n}{2} = S(n + 1)
+	\end{equation}
+	\qed
+	\\
+	Just like this, we proved $P(n)$ to be true.
+\end{document}
