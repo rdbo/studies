@@ -1,0 +1,122 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\begin{document}
+	\section{Concepts}
+	\begin{itemize}
+		\item \textbf{Proof by contradiction}: to prove $p$ is true, we assume $p$ is false and we use that hypothesis to derive falsehood or contradiction. It means $\neg p => false$ is true, and the only way that can be true is if $p$ is true.
+		
+		\item \textbf{Proof by induction}: we use the induction axiom to reduce the full range of a proof. For example:\\
+		let $P(n)$ be a predicate. If $P(0)$ is true, and $\forall n \in N$, $P(n) => P(n + 1)$, then $\forall n \in N,$ $P(n)$ is true.\\
+		If $P(0)$ is true, then $P(1)$ is true.\\
+		If $P(1)$ is true, then $P(2)$ is true.\\
+		And so on. This means that by proving $P(0)$, we prove $P(n)$.
+	\end{itemize}
+	\section{Proving by contradiction}
+	To prove by contradiction that $\sqrt{2}$ is irrational, we can assume that is rational and try to find a contradiction from there.\newline
+	\indent$\sqrt{2} = \frac{a}{b}$ where $\frac{a}{b}$ is the fraction in lowest terms (every rational number can be represented like that)\newline
+	\indent$=> 2 = \frac{a^2}{b^2}$\newline
+	\indent$=> 2b^2 = a^2$\newline\\
+	From this point, we know that $a$ is even because we assume that only even numbers squared can be equal to another even number (axiom).\\
+	\indent$=> 2 | a$ ($2$ divides $a$, meaning $a$ is even)\\\\
+	Since $a^2$ is even and $a$ is even, we can assume:\\
+	\indent$=> 2 | b^2$\\
+	\indent$=> 2 | b$\\\\
+	If both $a$ and $b$ are even, it means they are \textbf{not} in their lowest terms, which is a contradiction.\\
+	\indent $=> \frac{a}{b}$ is not on lowest terms\\
+	\indent $=> \#$ (contradiction)\\
+	\indent $=> $ (proof ended)\\
+	
+	\pagebreak
+	
+	\section{Proving by induction}
+	\subsection{First proposition}
+	The proposition we are trying to prove is\\
+	\begin{equation}
+		\forall\ n \geq 0 \indent 1 + 2 + 3 + ...\ n = \frac{n(n+1)}{2}\\
+	\end{equation}
+	which is equivalent to\\
+	\begin{equation}
+		\sum^{n}_{i=1}{i} = \frac{n(n+1)}{2}
+	\end{equation}
+	
+	\subsubsection{Base case}
+	For $n = 0$, we have the following truthful equation:
+	\begin{equation}
+		\sum^{0}_{i=1}{i} = \frac{0(0+1)}{2} = 0
+	\end{equation}
+	
+	\subsubsection{Inductive step}
+	Assume $P(n)$ is true for purposes of verifying the inductive hypothesis.\\
+	Now we will try to prove that $P(n) => P(n + 1)$
+	\begin{equation}
+		\sum^{n + 1}_{i=1}{i} = \frac{(n + 1)(n + 2)}{2}
+	\end{equation}
+	which is the same as:
+	\begin{equation}
+		1 + 2 + 3 + ... + n + (n + 1) = \frac{(n + 1)(n + 2)}{2}
+	\end{equation}
+	We already assumed that:
+	\begin{equation}
+		1 + 2 + 3 + ... + n = \frac{n(n + 1)}{2}
+	\end{equation}
+	so we can also assume that:
+	\begin{equation}
+		\frac{n(n + 1)}{2} + (n + 1) = \frac{(n + 1)(n + 2)}{2}
+	\end{equation}
+	Resolving the equation, we get:
+	\begin{equation}
+		{n(n + 1)} + 2(n + 1) = (n + 1)(n + 2)
+	\end{equation}
+	\begin{equation}
+		{n^2 + 3n + 2} = n^2 + 3n + 2
+	\end{equation}
+	We got an equality, so we can safely assume that $\forall\ n \geq 0 $, $P(n) => P(n + 1)$\\
+	Which means that by solving $P(0)$ we proved $P(n)$.
+	
+	\pagebreak
+	
+	\subsection{Second proposition}
+	The proposition we are trying to prove is that $3$ divides any $n^3 - n$, if $n$ is natural and positive.
+	\begin{equation}
+		P(n) = 3\ |\ (n^3 - n)
+	\end{equation}
+		\begin{equation}
+			\forall\ n \in N^+\ \ \ P(n) = true
+		\end{equation}
+		
+	\subsubsection{Base case}
+	\begin{equation}
+		3\ |\ (0^3 - 0) = true
+	\end{equation}
+	\subsubsection{Inductive step}
+	Assuming $P(n)$ is true, we can say that any $(n^3 - n)$ is divisible by $3$.
+	Now we can try to prove $P(n + 1)$ based on that inductive axiom.
+	\begin{equation}
+		=> proof\ by\ induction
+	\end{equation}
+	\begin{equation}
+		=> ((n + 1)^3 - (n + 1))
+	\end{equation}
+	\begin{equation}
+		=> n^3 + 3n^2 + 3n + 1 - (n + 1)
+	\end{equation}
+	\begin{equation}
+		=> n^3 + 3n^2 + 2n
+	\end{equation}
+	If we can prove that $n^3 + 3n^2 + 2n$ is divisible by 3, then we can conclude that $P(n) => P(n + 1)$. To do that, we have to use our inductive axiom to our favor. In this case, by forcing $n^3 - n$ to show up in the previous statement:
+	\begin{equation}
+		=> n^3 - n + 3n^2 + 2n + n
+	\end{equation}
+	\begin{equation}
+		=> n^3 - n + 3n^2 + 3n
+	\end{equation}
+	We know that $n^3 - n$ is divisible by three, and we also know that $3n^2 + 3n$ is divisible by three, so the whole thing is divisible by three. Therefore the following statement is true:
+	\begin{equation}
+		=> 3\ |\ (n^3 - n + 3n^2 + 3n) = true
+	\end{equation}
+	\begin{equation}
+		=> \qed
+	\end{equation}
+	So we can safely say that $P(n) => P(n + 1)$ and our proof by induction is finished.
+\end{document}
