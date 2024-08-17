@@ -1,0 +1,59 @@
+\documentclass{article}
+\begin{document}
+	\section{Proofs}
+	\subsection{Concepts}
+	\begin{itemize}
+		\item \textbf{Proof}: the verification of a proposition by a chain of logical deductions from a set of axioms
+		
+		\item \textbf{Proposition}: statement that is either true or false. Examples:\newline
+		$2 + 3 = 5$\newline
+		$\forall$ $n \in N, n^2 + n + 41$ is a prime number
+		
+		An \textbf{implication} $p => q$ is said to be true if $p$ is false or $q$ is true\newline
+		Truth table:\newline
+		\begin{tabular}{ |c|c|c| } 
+			\hline
+			$p$ & $q$ & $p => q$ \\
+			\hline
+			true & true & true \\
+			true & false & false \\ 
+			false & true & true \\ 
+			false & false & true \\
+			\hline
+		\end{tabular}
+		
+		An \textbf{implication} $p <=> q$ is said to be true if $p => q$ and $q => p$\newline
+		Truth table:\newline
+		\begin{tabular}{ |c|c|c| } 
+			\hline
+			$p$ & $q$ & $p => q$ \\
+			\hline
+			true & true & true \\
+			true & false & false \\ 
+			false & true & false \\ 
+			false & false & false \\
+			\hline
+		\end{tabular}
+		
+		\item \textbf{Predicate}: proposition whose truth depends on the value of a variable. The predicate of the above proposition is \textit{$n^2 + n + 41$ is a prime number}
+		
+		\item \textbf{Axiom}: proposition that is assumed to be true. For example: \newline
+		\indent if $a = b$ and $b = c$, then $a = c$\newline\newline
+		Some axioms can be contradictory. In Euclidean geometry, given a line $L$ and a point $p$ that isn't on $L$, there is exactly one line through $p$ parallel to $L$.\newline
+		In spherical geometry, there are no lines through $p$ parallel to $L$.\newline
+		In hyperbolic geometry, there are infinitely many lines through $p$ parallel to $L$.\newline
+		This doesn't mean that the axiom is false. It is \textbf{consistent} and \textbf{complete} on their specified fields.\newline
+		An axiom is \textbf{consistent} if no proposition can prove it to be true or false.\newline
+		An axiom is \textbf{complete} if it can be used to prove that either proposition is true or false.
+	\end{itemize}
+	\subsection{Verifying truths}
+	\subsubsection{Prime number proposition}
+	The following proposition looks truthful for at least a couple of numbers:\newline
+	\indent $\forall$ $n \in N, n^2 + n + 41$ is a prime number\newline
+	You get good cases on the range [0, 39]. You only get your first bad case with n = 40. This means that even though a proposition looks truthful at first, it might not actually be.
+	\subsubsection{Euler's proposition}
+	Euler proposed that there are no possible positive integer values that make the following equation true: $a^4$ + $b^4$ + $c^4$ = $d^4$. \newline
+	Later it was found out that \textit{a = 95,800; b = 217,519; c = 414,560; d = 422,481} does solve the equation.
+	With that, we can affirm that the proposition is true:\newline
+	\indent $\exists$ a,b,c,d,e $\in$ $N^+$, $a^4$ + $b^4$ + $c^4$ = $d^4$
+\end{document}
