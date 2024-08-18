@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\begin{document}
+	\section{Concepts}
+	\begin{itemize}
+		\item \textbf{Encryption}: uses an algorithm to turn a plaintext message $m$ into a ciphertext $m'$ using a key/keypair $k$. $m' = E_k(m)$.
+		\item \textbf{Decryption}: uses an algorithm to turn a ciphertext message $m'$ into a plaintext $m$ using a key/keypair $k$. $m = D_k(m')$.
+	\end{itemize}
+	
+	\section{Cryptography}
+	\subsubsection{"TuringCode v1"}
+	There has to be a key exchange beforehand between the message sender and the receiver.\\
+	The encryption scheme needs to be hard to revert by an external interceptor.\\
+	There certain properties which are considered to be hard to revert:
+	\begin{itemize}
+		\item Factoring large prime numbers
+	\end{itemize}
+	Let's consider the following encryption scheme:
+	
+	$E_k(m) = mk$
+	
+	$D_k(m') = \frac{m'}{k}$\\
+	\\
+	If $m$ and $k$ are large prime numbers, this can be relatively hard to revert.\\
+	But once we start sending more messages, we can spot a problem:
+	
+	$m_1' = m_1 * k$
+	
+	$m_2' = m_2 * k$\\
+	\\
+	If the interceptor got both these messages, he can guess the key by using the following equation:
+	
+	$k = \gcd(m_1', m_2')$
+	
+	\pagebreak
+	
+	\subsubsection{"TuringCode v2"}
+	Beforehand: exchange a public prime $p$, and keep a secret prime $k$.\\
+	The message is going to be represented as a number $m \in [0, 1, ..., p - 1]$\\
+	The algorithms used will be:
+	
+	$E(m) = rem(mk, p)$
+	
+	$D(m) = rem(mk, p)$
+	
+	
+\end{document}
