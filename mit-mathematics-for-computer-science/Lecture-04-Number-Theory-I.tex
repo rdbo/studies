@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\begin{document}
+	\section{Concepts}
+	\begin{itemize}
+		\item \textbf{Number theory} is the study of the integers. It's an old science and only recently it got a major use for cryptography.
+		\item \textbf{Cryptography} is the study and practice of hiding numbers.
+		\item $gcd(a, b)$ is the greatest common divisor between $a$ and $b$.
+		\item $a$ and $b$ are relatively prime because $gcd(a, b) = 1$.
+	\end{itemize}
+	
+	\section{4 gallon jug problem}
+	You have a 5 gallon jug and a 3 gallon jug. The objective is to fill the 5 gallon jug to exactly 4 gallons of water. To do that, you can fill up the 3 gallon jug, pour it into the 5 gallon jug. Now you fill the 3 gallon jug again, and pour it on the 5 gallon jug until it's filled to the top. This leaves the 3 gallon jug filled 1 gallon of water, and the 5 gallon jug completely full. You pour out the water of the 5 gallon jug, and pour the 3 gallon jug in the 5 gallon jug. After that, you just have to fill the 3 gallon jug and pour it again on the 5 gallon jug and you will have exactly 4 gallons of water in it.
+	
+	\subsection{The logic behind the problem}
+	$m | n$ if $\exists\ k\ \ k * m = n$\\
+	$m | 0$ always
+	
+	\subsection{Theorem}
+	You have an $a$ gallon jug and a $b$ gallon jug, and you want to fill the $b$ gallon jug to $q$ gallons.
+	
+	$a \leq b$
+	
+	If $m | a$ and $m | b$, then $m|$any result we can get
+	\\
+	For the 3 and 5 gallon case, our $m$ is $1$, because it's the only number that divides 3 and 5. For a 3 and 6 gallon case, the $m$ would be $3$, and therefore you cannot fill it up to $4$ gallons, since 3 does not divide 4 (theorem).
+	
+	\pagebreak
+	
+	\subsection{State machine}
+	\textbf{States}: $(x, y)$ where $x$ is the number of gallons in the "$a$-jug", and $y$ is the number of gallons in the "$b$-jug".\\
+	\textbf{Transitions}:
+	\begin{itemize}
+		\item \textbf{Emptying}:
+		
+		$(x, y) \rightarrow (0, y)$:  empty the "a-jug"
+		
+		$(x, y) \rightarrow (x, 0)$:  empty the "b-jug"
+		
+		\item \textbf{Filling}:
+		
+		$(x, y) \rightarrow (a, y)$: fill the "a-jug"
+		
+		$(x, y) \rightarrow (x, b)$: fill the "b-jug"
+		
+		\item \textbf{Pouring}:
+		
+		$(x, y) \rightarrow (0, x + y), x + y \leq b$: add the contents of the "a-jug" to the "b-jug", if it has enough space left
+		
+		$(x, y) \rightarrow (x - (b - y), b), x + y - b \geq b$: add just contents of the "a-jug" that fits into the "b-jug"
+		
+		$(x, y) \rightarrow (x + y, 0), x + y \leq a$: add the contents of the "b-jug" to the "a-jug", if it has enough space left
+		
+		$(x, y) \rightarrow (a, y - (a - x)) = (a, x + y - a), x + y - a \geq a$: add just contents of the "b-jug" that fits into the "a-jug"
+	\end{itemize}
+	
+	\subsection{Proof (by induction)}
+	\textbf{Invariant}: $P(n) = $"If $(x, y)$ is the state after $n$ transitions, we can conclude that $m | x$ and $m | y$"
+	\\
+	\subsection{Base case}
+	For $x = 0$ and $y = 0$, $m | x$ and $m | y $.
+	
+	\subsection{Inductive step}
+	Assuming $P(n)$ is true, we can prove that $P(n + 1)$ is also true.\\
+	After another transition, we have the following possible states for any jug:
+	
+	$0, a, b, x, y, x + y, x + y - a, x + y - b, x + y - b$
+	\\
+	We already assumed that $m | a$, $m | b$, $m | 0$, $m | x$, $m | y$. Any linear combination of $x, y$, such as $x + y - a$, will also give a multiple of $m$. So $m$ divides any of the states.
+	\\
+	\textbf{Corollary 1}: $gcd(a, b)$ divides any state for the number of gallons in a jug.
+	\\
+	\qed
+\end{document}
