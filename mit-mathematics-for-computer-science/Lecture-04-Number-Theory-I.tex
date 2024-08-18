@@ -72,4 +72,79 @@
 	\textbf{Corollary 1}: $gcd(a, b)$ divides any state for the number of gallons in a jug.
 	\\
 	\qed
+	
+	\pagebreak
+	
+	\section{Generic theorem for the jug problem}
+	\textbf{Theorem}: Any result linear combination $L = sa + tb$ of $a$ and $b$ with $0 \leq L \leq b$ can be reached. We are still assuming $a \leq b$.
+	
+	Example: $4 = -2 * 3 + 2 * 5$ (this means 4 is a possible solution for 3 and 5 gallon jugs)\\
+	\\
+	We can make S positive by adding a new multiplication to the scene: \\
+	$-2 * 3 + 2 * 5$\\
+	$+\ 5 * 3 - 3 * 5$\\
+	---------------------\\
+	$3 * 3 - 1 * 5 = 4$
+	\\
+	\\
+	Let's call the new $s$ and $t$ values as $s'$ and $t'$, respectively.
+	\\
+	\\
+	\textbf{Proof}: Notice that $L = sa + tb = (s + mb)a + (t - ma)b$\\
+	So $\exists\ s', t'$ with $s' > 0$\\
+	\\
+	Assume that $0 < L < b$.\\
+	To obtain $L$ gallons, repeat the following algorithm $s'$ times:
+	\begin{itemize}
+		\item Fill the "a-jug"
+		\item Pour it into the "b-jug". When it becomes full, empty it out and continue pouring. Keep doing this until the "a-jug" is empty.
+	\end{itemize}
+	
+	Solving the initial problem with this algorithm gives the following results:
+	\begin{itemize}
+		\item First iteration: $(0, 0) \rightarrow (3, 0) \rightarrow (0, 3)$
+		\item Second iteration: $(0, 3) \rightarrow (3, 3) \rightarrow (1, 5) \rightarrow (1, 0) \rightarrow (0, 1)$
+		\item Third iteration: $(0, 1) \rightarrow (3, 1) \rightarrow (0, 4)$
+	\end{itemize}
+	We filled the "a-jug" $s'$ times. Suppose that we empty out the "b-jug" $u$ times. Let $r$ be the remainder in the "b-jug" so that $0 \leq r \leq b$ and $r = s' * a - u * b$.
+	\\
+	We want to affirm that $r = L$, and to do that we can:
+	
+	$r = s'a + t'b - t'b - ub$
+	
+	$L = s'a + t'b$
+	
+	$r = L - t'b - ub = L - b(t' + u)$
+	\\
+	We can do a couple of affirmations about $t'$ and $u$.
+	
+	$t' + u \neq 0 \implies r < 0 \lor r > b$ (not possible!)
+	
+	$t' + u = 0 \implies u = -t'$
+	\\
+	Therefore $r = L$.\\
+	\qed
+	
+	\pagebreak
+	
+	\section{Euclid's algorithm}
+	For every $a$ and $b$, there exists a unique quotient $q$ and a remainder $r$ such that $b = qa + r$ with $0 \leq r < a$. Note: $r = rem(b, a)$\\
+	\\
+	\textbf{Lemma 1}: $\gcd(a, b) = \gcd(rem(b, a), a)$\\
+	\\
+	Example:
+	
+	$\gcd(105, 224) = \gcd(rem(105, 224), 105)$
+	
+	$224 = 2 * 105 + 14 \implies rem(105, 224) = 14$
+	
+	$\gcd(105, 224) = \gcd(14, 105) = \gcd(rem(14, 105), 105)$
+	
+	$105 = 7 * 14 + 7 \implies rem(14, 105) = 7$
+	
+	$gcd(105, 224) = gcd(rem(14, 7), 7)$
+	
+	$gcd(0, 7) = 7$
+	
+	$gcd(105, 224) = 7$
 \end{document}
